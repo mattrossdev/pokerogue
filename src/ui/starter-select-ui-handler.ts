@@ -65,27 +65,27 @@ function getPassiveCandyCount(baseValue: integer): integer {
 function getValueReductionCandyCounts(baseValue: integer): [integer, integer] {
   switch (baseValue) {
     case 1:
-      return [30, 75];
+      return [ 30, 75];
     case 2:
-      return [25, 60];
+      return [ 25, 60 ];
     case 3:
-      return [20, 50];
+      return [ 20, 50 ];
     case 4:
-      return [15, 40];
+      return [ 15, 40 ];
     case 5:
-      return [12, 35];
+      return [ 12, 35 ];
     case 6:
-      return [10, 30];
+      return [ 10, 30 ];
     case 7:
-      return [8, 20];
+      return [ 8, 20 ];
     case 8:
-      return [5, 15];
+      return [ 5, 15 ];
     default:
-      return [3, 10];
+      return [ 3, 10 ];
   }
 }
 
-const gens = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+const gens = [ 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX' ];
 
 export default class StarterSelectUiHandler extends MessageUiHandler {
   private starterSelectContainer: Phaser.GameObjects.Container;
@@ -167,7 +167,7 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
   private starterIcons: Phaser.GameObjects.Sprite[];
   private genCursorObj: Phaser.GameObjects.Image;
   private genCursorHighlightObj: Phaser.GameObjects.Image;
-  private valueLimitLabel: Phaser.GameObjects.Text;
+  private valueLimitLabel: Phaser.GameObjects.Text
   private startCursorObj: Phaser.GameObjects.NineSlice;
   private randomCursorObj: Phaser.GameObjects.NineSlice;
   private starterValueLabels: Phaser.GameObjects.Text[];
@@ -1126,7 +1126,7 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
   }
 
   updateInstructions(): void {
-    let instructionLines = [];
+    let instructionLines = [ ];
     let cycleInstructionLines = [];
     if (this.speciesStarterDexEntry?.caughtAttr) {
       if (this.canCycleShiny)
@@ -1205,7 +1205,7 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
           this.updateStarterValueLabel(s);
         this.starterValueLabels[s].setVisible(slotVisible);
         const speciesVariants = speciesId && this.scene.gameData.dexData[speciesId].caughtAttr & DexAttr.SHINY
-          ? [DexAttr.DEFAULT_VARIANT, DexAttr.VARIANT_2, DexAttr.VARIANT_3].filter(v => !!(this.scene.gameData.dexData[speciesId].caughtAttr & v))
+          ? [ DexAttr.DEFAULT_VARIANT, DexAttr.VARIANT_2, DexAttr.VARIANT_3 ].filter(v => !!(this.scene.gameData.dexData[speciesId].caughtAttr & v))
           : [];
         for (let v = 0; v < 3; v++) {
           const hasVariant = speciesVariants.length > v;
@@ -1324,7 +1324,7 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
         this.pokemonCaughtHatchedContainer.setVisible(true);
         if (pokemonPrevolutions.hasOwnProperty(species.speciesId)) {
           this.pokemonCaughtHatchedContainer.setY(16);
-          [this.pokemonCandyIcon, this.pokemonCandyOverlayIcon, this.pokemonCandyCountText].map(c => c.setVisible(false));
+          [ this.pokemonCandyIcon, this.pokemonCandyOverlayIcon, this.pokemonCandyCountText ].map(c => c.setVisible(false));
         } else {
           this.pokemonCaughtHatchedContainer.setY(25);
           this.pokemonCandyIcon.setTint(argbFromRgba(Utils.rgbHexToRgba(colorScheme[0])));
@@ -1511,7 +1511,7 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
 
         this.canCycleShiny = !!(dexEntry.caughtAttr & DexAttr.NON_SHINY && dexEntry.caughtAttr & DexAttr.SHINY);
         this.canCycleGender = !!(dexEntry.caughtAttr & DexAttr.MALE && dexEntry.caughtAttr & DexAttr.FEMALE);
-        this.canCycleAbility = [abilityAttr & AbilityAttr.ABILITY_1, (abilityAttr & AbilityAttr.ABILITY_2) && species.ability2, abilityAttr & AbilityAttr.ABILITY_HIDDEN].filter(a => a).length > 1;
+        this.canCycleAbility = [ abilityAttr & AbilityAttr.ABILITY_1, (abilityAttr & AbilityAttr.ABILITY_2) && species.ability2, abilityAttr & AbilityAttr.ABILITY_HIDDEN].filter(a => a).length > 1;
         this.canCycleForm = species.forms.filter(f => !f.formKey || !pokemonFormChanges[species.speciesId]?.find(fc => fc.formKey))
           .map((_, f) => dexEntry.caughtAttr & this.scene.gameData.getFormAttr(f)).filter(f => f).length > 1;
         this.canCycleNature = this.scene.gameData.getNaturesForAttr(dexEntry.natureAttr).length > 1;
@@ -1723,7 +1723,7 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
               passive: !(thisObj.scene.gameData.starterData[starterSpecies.speciesId].passiveAttr ^ (PassiveAttr.ENABLED | PassiveAttr.UNLOCKED)),
               nature: thisObj.starterNatures[i] as Nature,
               moveset: thisObj.starterMovesets[i],
-              pokerus: !![0, 1, 2].filter(n => thisObj.pokerusGens[n] === starterSpecies.generation - 1 && thisObj.pokerusCursors[n] === thisObj.genSpecies[starterSpecies.generation - 1].indexOf(starterSpecies)).length
+              pokerus: !![ 0, 1, 2 ].filter(n => thisObj.pokerusGens[n] === starterSpecies.generation - 1 && thisObj.pokerusCursors[n] === thisObj.genSpecies[starterSpecies.generation - 1].indexOf(starterSpecies)).length
             };
           }));
         };
